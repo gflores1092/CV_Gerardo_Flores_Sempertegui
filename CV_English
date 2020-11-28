@@ -1,0 +1,199 @@
+---
+name: Gerardo Flores Sempertegui
+position: "Data Scientist | Industrial Engineer | MBA"
+address: |
+         | San Martin 590 - Miraflores, Lima
+         | Nationality: Peruvian, Country: Peru
+profilepic: "C:/Users/Gerardo Flores/Documents/CV/gflores1092.jpg"
+phone: "(+51) 948425000"
+email: "gflores1092@gmail.com"
+linkedin: gflores1092
+twitter: gflores1092
+github: gflores1092
+headcolor: 0066CC
+date: "`r format(Sys.time(), '%B %Y')`"
+output: vitae::awesomecv
+always_allow_html: yes
+header-includes:
+  \usepackage{fontawesome}
+  \definecolor{awesome}{HTML}{0066CC}
+  \definecolor{text}{HTML}{0066CC} 
+  \definecolor{light-gray}{gray}{0.95}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
+library(vitae)
+library(tidyverse)
+```
+
+```{r}
+#Baretable function
+baretable <- function(tbl, digits = 0,
+                      include.colnames=FALSE, include.rownames=FALSE,
+                      hline.after=NULL,
+                      size=getOption("xtable.size", NULL),
+                      add.to.row=getOption("xtable.add.to.row", NULL),
+                      ...) {
+  tbl %>%
+    xtable::xtable(digits=digits, ...) %>%
+    print(
+      include.colnames=include.colnames,
+      include.rownames=include.rownames,
+      hline.after=hline.after,
+      comment=FALSE,
+      latex.environments=NULL,
+      floating=FALSE,
+      size=size,
+      add.to.row=add.to.row,
+      sanitize.text.function=function(x) {
+        x
+      }
+    )
+}
+```
+
+\smallskip
+
+\color{black}{\Large\faBriefcase}\section{Professional experience}
+
+```{r experience, results='asis'}
+tribble(~start, ~end, ~position,
+        2020, NA, "\\textbf{Senior Data Analyst - Marketing}, Glovo, \\emph{Lima, Peru}",
+        2020, NA, "- Led the BI reporting processes in Peru with a focus in customer data mining to promote growth.",
+        2020, NA, "- Developed predictive models at customer and product level for recommendations and promotions.",
+        2020, NA, "- Cleaned, organized and analyzed large datasets using SQL, R, Python, Hive and Spark.",
+        2020, NA, "",
+        2018, 2019, "\\textbf{Senior Data Analyst - Supply Ops}, Glovo, \\emph{Lima, Peru}",
+        2018, 2019, "- Led the analytics team in Peru and designed reports, dashboards and models for multiple areas.",
+        2018, 2019, "- Designed tools and models to decrease fraud exposure and improve operational metrics.",
+        2018, 2019, "- Participated in multiple projects to ensure Glovo's operational excellence at local and regional level.",
+        2018, 2019, "",
+        2017, 2017, "\\textbf{Survey Data Analyst}, Entel, \\emph{Lima, Peru}",
+        2017, 2017, "- Participated in the automation process of corporative customers satisfaction reports.",
+        2017, 2017, "- Provided business intelligence services to management using SQL, R and Power BI.",
+        2017, 2017, "- Developed data mining and machine learning projects to improve customer satisfaction levels.",
+        
+        2017, 2017, "",
+        2016, 2017, "\\textbf{Network Analyst}, Entel, \\emph{Lima, Peru}",
+        2016, 2017, "- Led a team of 3 to organize, clean and build the network's infrastructure database.",
+        2016, 2017, "- Coordinated technical and commercial agreements with suppliers, lessors and intermediaries.",
+        2016, 2017, "- Participated in data based projects that resulted in savings of more than 250'000 PEN.",
+        2016, 2017, "",
+        2015, 2016, "\\textbf{Business Analyst}, FLSmidth, \\emph{Lima, Peru}",
+        2015, 2016, "- Led the activation and invoicing project of the company's services in a 5 year period.",
+        2015, 2016, "- Responsible for the automation of reports and dashboards for management.",
+        2015, 2016, "",
+        2015, 2015, "\\textbf{Production Assistant}, Goodyear, \\emph{Lima, Peru}",
+        2015, 2015, "- Supervised the process and KPI's of the production and operating staff in the plant.",
+        2015, 2015, "- Led project squads to improve the factory's operational KPI's based on the data analyses.",
+        2015, 2015, "",
+        2014, 2014, "\\textbf{Production Trainee}, Goodyear, \\emph{Lima, Peru}",
+        2014, 2014, "",
+        2013, 2014, "\\textbf{Planning Trainee}, Metso, \\emph{Lima, Peru}",
+        ) %>%
+        arrange(-start) %>%
+        mutate(end=replace_na(end, "")) %>%
+        mutate(years=if_else(end==start,
+                             as.character(start),
+                             paste(start, "--", end, sep=""),
+                             paste(start, "--", end, sep="")
+                             )
+               ) %>%
+        select(years, position) %>%
+        group_by(years) %>%
+        mutate(n=row_number()) %>%
+        mutate(years=case_when(n>1 ~ "", TRUE ~ years)) %>%
+        select(years, position) %>%
+        baretable(.)
+```
+
+\smallskip
+
+\color{black}{\Large\faMortarBoard}\section{Academic record and qualifications}
+
+```{r qualifications, results='asis'}
+tribble(~year, ~degree, ~institution, ~place,
+        2018, "\\textbf{Master in Business Administration}", "CENTRUM Catolica", "\\emph{Lima, Peru}",
+        2014, "\\textbf{Industrial Engineer}", "Pontificia Universidad Catolica del Peru", "\\emph{Lima, Peru}",
+        ) %>%
+        baretable()
+```
+
+\smallskip
+
+\color{black}{\Large\faUniversity}\section{Courses}
+
+```{r courses, results='asis'}
+tribble(~year, ~degree, ~institution, ~place,
+        2018, "\\textbf{Global Business Management}", "CENTRUM Catolica", "\\emph{Lima, Peru}",
+        2018, "\\textbf{Global Business Management}", "University of Victoria", "\\emph{Victoria, B.C., Canada}",
+        2018, "\\textbf{Global Business Management}", "Maastricht University", "\\emph{Maastricht, Netherlands}",
+        2016, "\\textbf{Data Management and Analytics}", "CENTRUM Catolica", "\\emph{Lima, Peru}",
+        ) %>%
+        group_by(year,degree) %>%
+        mutate(n=row_number()) %>%
+        mutate(year=case_when(n>1 ~ "", TRUE ~ as.character(year)),
+               degree=case_when(n>1 ~ "", TRUE ~ degree)) %>%
+        select(year:place) %>%
+        baretable()
+```
+
+\newpage
+
+\smallskip
+
+\color{black}{\Large\faFile}\section{Other courses}
+
+```{r certifications, results='asis'}
+tribble(~year, ~degree, ~institution,
+        2020, "\\textbf{Neural Networks and Deep Learning}", "deeplearning.ai",
+        2020, "\\textbf{Improving Deep Neural Networks}", "deeplearning.ai"
+        ) %>%
+        baretable()
+```
+
+\smallskip
+
+\color{black}{\Large\faComment}\section{Languages}
+
+```{r languages, results='asis'}
+tribble(~language,
+        "Spanish, English, Portuguese"
+        ) %>%
+        baretable()
+```
+
+\smallskip
+
+\color{black}{\Large\faBook}\section{Technical skills}
+
+```{r technical_skills, results='asis'}
+tribble(~type, ~language, ~packages,
+        "Data analysis", "R", "Tidyverse, Shiny, RMarkdown, Sparklyr",
+        "Development / Machine Learning", "Python", "Pandas, Numpy, Scikit Learn, Tensorflow",
+        "Database", "SQL, Hive", "MySQL, Amazon Redshift, Apache Hive",
+        "Tools / Frameworks", "Git, Spark", "Version control and big data processing",
+        "Other languages", "VBA, JavaScript", "",
+        "Visualization tools", "Power BI, Looker, Tableau", ""
+        ) %>%
+        baretable()
+```
+
+\smallskip
+
+\color{black}{\Large\faSearch}\section{Areas of interest}
+
+```{r interests, results='asis'}
+tribble(~interests,"Data Science, Machine Learning, Deep Learning, Neural Networks, Artificial Intelligence") %>%
+        baretable()
+```
+
+\smallskip
+
+\color{black}{\Large\faBalanceScale}\section{Hobbies}
+
+```{r hobbies, results='asis'}
+tribble(~hobbies,"Cycling, trekking, history, yoga and avid book reader.") %>%
+        baretable()
+```
