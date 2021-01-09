@@ -1,5 +1,5 @@
 # CV_Gerardo_Flores_Sempertegui
 
-This is my updated resume done with the rmarkdown, vitae and dplyr packages.
+This is my updated resume done with the R packages RMarkdown, dplyr and vitae and LaTeX.
 
 To get a PDF file just Knit to PDF.
